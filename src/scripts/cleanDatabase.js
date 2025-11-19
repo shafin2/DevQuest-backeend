@@ -12,7 +12,16 @@ dotenv.config({ path: join(__dirname, '../../.env') });
 const cleanDatabase = async () => {
   try {
     console.log('🔌 Connecting to MongoDB...');
-    await mongoose.connect(process.env.MONGO_URI);
+    
+    const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
+    
+    if (!mongoUri) {
+      console.error('❌ MONGODB_URI not found in environment variables');
+      console.log('💡 Make sure your .env file exists at:', join(__dirname, '../../.env'));
+      process.exit(1);
+    }
+    
+    await mongoose.connect(mongoUri);
     console.log('✅ Connected to MongoDB');
 
     const collections = await mongoose.connection.db.collections();
