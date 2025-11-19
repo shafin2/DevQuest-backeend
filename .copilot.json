@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "ignore": [
+    "node_modules",
+    "dist",
+    "build",
+    ".git",
+    "coverage",
+    "logs",
+    "tmp",
+    "*.log"
+  ],
+  "style": {
+    "language": "javascript",
+    "framework": "express",
+    "comments": false,
+    "verbosity": "minimal",
+    "imports": "explicit",
+    "naming": "consistent",
+    "error_handling": "standard",
+    "testing": "jest"
+  },
+  "context": {
+    "project_type": "backend",
+    "goal": "enterprise-grade scalable backend architecture with minimal boilerplate and clear separation of concerns",
+    "primary_focus": [
+      "api design",
+      "database models",
+      "authentication",
+      "business logic organization",
+      "error handling",
+      "config management"
+    ],
+    "exclude_features": [
+      "frontend",
+      "ui",
+      "unnecessary abstractions",
+      "over-engineering patterns"
+    ]
+  },
+  "directories": {
+    "root": [
+      "src",
+      "tests",
+      "config",
+      "scripts",
+      "migrations"
+    ],
+    "src": [
+      "api",
+      "modules",
+      "core",
+      "utils",
+      "middlewares",
+      "services"
+    ],
+    "modules": [
+      "auth",
+      "users",
+      "doctors",
+      "patients",
+      "appointments"
+    ]
+  },
+  "suggestions": {
+    "code_style": "modular",
+    "prefer": [
+      "async/await",
+      "dotenv for config",
+      "ESM imports",
+      "centralized error handling",
+      "route-based modularization"
+    ],
+    "avoid": [
+      "callback hell",
+      "inline logic",
+      "monolithic controllers"
+    ]
+  },
+  "copilot_target": [
+    "generate concise, scalable backend code",
+    "use professional folder structure",
+    "focus on maintainable, testable modules"
+  ]
+}
