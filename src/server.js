@@ -7,6 +7,7 @@ import authRoutes from './routes/auth.routes.js';
 import projectRoutes from './routes/project.routes.js';
 import taskRoutes from './routes/task.routes.js';
 import profileRoutes from './routes/profile.routes.js';
+import chatRoutes from './routes/chat.routes.js';
 import { errorHandler } from './middleware/errorHandler.js';
 import { rateLimiter } from './middleware/rateLimiter.js';
 
@@ -30,6 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/profile', profileRoutes);
+app.use('/api/chat', chatRoutes);
 
 app.use(errorHandler);
 
