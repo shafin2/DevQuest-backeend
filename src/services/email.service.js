@@ -14,6 +14,8 @@ const sendEmail = async (to, subject, html) => {
   });
 };
 
+export { sendEmail };
+
 export const sendVerificationEmail = async (email, token, name) => {
   const url = `${process.env.CLIENT_WEB_URL}/verify-email/${token}`;
   const html = verificationEmailTemplate(url, name);

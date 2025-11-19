@@ -1,4 +1,5 @@
 import * as authService from '../services/auth.service.js';
+import User from '../models/User.model.js';
 
 export const signup = async (req, res, next) => {
   try {
@@ -84,6 +85,29 @@ export const resendVerificationEmail = async (req, res, next) => {
   try {
     await authService.resendVerificationEmail(req.body.email);
     res.json({ success: true, message: 'Verification email sent successfully' });
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const getLeaderboard = async (req, res, next) => {
+  try {
+    const { role } = req.query;
+    const filter = {};
+    
+    if (role && role !== 'all') {
+      filter.role = role;
+    }
+
+    const users = await User.find(filter)
+      .select('name email role xp level tasksCompleted avatar')
+      .sort({ xp: -1, level: -1 })
+      .limit(100);
+
+    res.json({
+      success: true,
+      data: { users },
+    });
   } catch (error) {
     next(error);
   }

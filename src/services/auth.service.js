@@ -1,5 +1,5 @@
 import User from '../models/User.model.js';
-import { AppError } from '../utils/AppError.js';
+import AppError from '../utils/AppError.js';
 import { generateTokens, verifyRefreshToken, generateEmailToken, verifyEmailToken } from '../utils/jwt.js';
 import * as emailService from './email.service.js';
 import { googleClient } from '../config/googleOAuth.js';

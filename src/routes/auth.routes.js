@@ -20,5 +20,6 @@ router.get('/verify-email/:token', authController.verifyEmail);
 router.post('/resend-verification', validateEmail, authController.resendVerificationEmail);
 router.post('/forgot-password', validateEmail, authController.forgotPassword);
 router.post('/reset-password/:token', validateResetPassword, authController.resetPassword);
+router.get('/leaderboard', authController.getLeaderboard);
 
 export default router;

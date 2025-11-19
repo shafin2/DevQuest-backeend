@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { AppError } from './AppError.js';
+import AppError from './AppError.js';
 
 export const generateTokens = (user, platform = 'web') => {
   const payload = { 

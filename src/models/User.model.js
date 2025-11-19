@@ -47,6 +47,36 @@ const userSchema = new mongoose.Schema({
     enum: ['full-time', 'part-time', 'contract', 'not-available'],
   },
   
+  // Gamification fields
+  xp: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  level: {
+    type: Number,
+    default: 1,
+    min: 1,
+  },
+  badges: [{
+    badgeId: String,
+    name: String,
+    earnedAt: {
+      type: Date,
+      default: Date.now,
+    },
+  }],
+  tasksCompleted: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  projectsCompleted: {
+    type: Number,
+    default: 0,
+    min: 0,
+  },
+  
   sessions: [{
     refreshToken: String,
     platform: {
@@ -69,6 +99,23 @@ userSchema.pre('save', async function(next) {
 userSchema.methods.comparePassword = async function(candidatePassword) {
   if (!this.password) return false;
   return await bcrypt.compare(candidatePassword, this.password);
+};
+
+// Calculate level based on XP (100 XP per level)
+userSchema.methods.updateLevel = function() {
+  const newLevel = Math.floor(this.xp / 100) + 1;
+  if (newLevel !== this.level) {
+    this.level = newLevel;
+    return true; // Level up occurred
+  }
+  return false;
+};
+
+// Add XP and check for level up
+userSchema.methods.addXP = function(points) {
+  this.xp += points;
+  const leveledUp = this.updateLevel();
+  return { xp: this.xp, level: this.level, leveledUp };
 };
 
 userSchema.methods.toJSON = function() {
